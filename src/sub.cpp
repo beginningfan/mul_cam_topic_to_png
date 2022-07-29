@@ -27,7 +27,7 @@ public:
             std::function<void(const sensor_msgs::msg::Image::ConstSharedPtr msg)> fnc =
                 std::bind(&CamSub::topic_callback, this, std::placeholders::_1, i);
             subscription_vector.at(i) = this->create_subscription<sensor_msgs::msg::Image>(
-                topic_list_[i], rclcpp::QoS{1}.best_effort(), fnc);
+                topic_list_[i], rclcpp::QoS{1}, fnc);
         }
     }
 

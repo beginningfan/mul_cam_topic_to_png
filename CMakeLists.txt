@@ -19,7 +19,7 @@ endif()
 find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(sensor_msgs REQUIRED)
-find_package(OpenCV REQUIRED)
+find_package(OpenCV 4.5.5 REQUIRED)
 find_package(cv_bridge REQUIRED)
 
 include_directories(
@@ -31,8 +31,13 @@ add_executable(sub src/sub.cpp)
 target_link_libraries (sub ${OpenCV_LIBRARIES})
 ament_target_dependencies(sub rclcpp sensor_msgs cv_bridge)
 
+add_executable(sub_cal src/sub_cal.cpp)
+target_link_libraries (sub_cal ${OpenCV_LIBRARIES})
+ament_target_dependencies(sub_cal rclcpp sensor_msgs cv_bridge)
+
 install(TARGETS
   sub
+  sub_cal
   DESTINATION lib/${PROJECT_NAME})
 
 install(
